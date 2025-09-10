@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lưu Bút Người Dùng</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('assets/1.webp');  /* Thêm hình nền */
+            background-size: cover;                 /* Đảm bảo hình nền phủ toàn bộ màn hình */
+            background-position: center;            /* Căn giữa hình nền */
+            background-attachment: fixed;           /* Giữ hình nền cố định khi cuộn trang */
+        }
+
+        .container {
+            width: 60%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .notes-list {
+            margin-top: 20px;
+        }
+
+        .notes-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .notes-list li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lưu Bút Của Bạn</h1>
+
+        <div class="form-container">
+            <label for="name">Tên:</label>
+            <input type="text" id="name" placeholder="Nhập tên của bạn">
+
+            <label for="note">Nội dung:</label>
+            <textarea id="note" placeholder="Nhập lưu bút của bạn..."></textarea>
+
+            <button onclick="saveNote()">Lưu Lại</button>
+        </div>
+
+        <div class="notes-list">
+            <h2>Lưu Bút Đã Lưu:</h2>
+            <ul id="notes"></ul>
+        </div>
+    </div>
+
+    <script>
+        function saveNote() {
+            // Lấy dữ liệu từ các ô input
+            const name = document.getElementById('name').value;
+            const note = document.getElementById('note').value;
+
+            if (name && note) {
+                // Tạo một mục mới trong danh sách
+                const noteItem = document.createElement('li');
+                noteItem.textContent = `${name}: ${note}`;
+
+                // Thêm mục mới vào danh sách lưu bút
+                document.getElementById('notes').appendChild(noteItem);
+
+                // Làm trống các ô input sau khi lưu
+                document.getElementById('name').value = '';
+                document.getElementById('note').value = '';
+            } else {
+                alert('Vui lòng nhập cả tên và nội dung!');
+            }
+        }
+    </script>
+</body>
+</html>
 
