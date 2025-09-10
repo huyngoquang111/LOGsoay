@@ -32,6 +32,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            position: relative;
         }
 
         h1, h2 {
@@ -70,26 +71,35 @@
             background-color: #45a049;
         }
 
+        /* Bãi container với hình ảnh nền */
         .notes-list {
             margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Xếp các box tự động theo chiều ngang */
-            gap: 10px; /* Khoảng cách giữa các "hộp" */
-            padding: 0;
+            position: relative;
+            background-image: url('assets/pngtree-big-realistic-shipping-container-side-view-clip-art-png-image_7931920.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 400px; /* Điều chỉnh chiều cao của bãi container */
+            display: flex;
+            flex-wrap: wrap; /* Cho phép các container nhỏ xếp chồng lên nhau */
+            gap: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
         }
 
         .notes-list li {
-            background-color: #f9f9f9;
-            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
             border-radius: 8px;
             border: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            position: relative;
             text-align: center;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
+        /* Hiệu ứng hover cho các ô lưu bút */
         .notes-list li:hover {
             transform: scale(1.05);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -123,9 +133,19 @@
             const notesList = document.getElementById('notes');
             notesList.innerHTML = ''; // Xóa danh sách cũ trước khi hiển thị lại
 
-            notes.forEach(note => {
+            notes.forEach((note, index) => {
                 const noteItem = document.createElement('li');
                 noteItem.textContent = `${note.name}: ${note.note}`;
+                
+                // Điều chỉnh kích thước container (li) dựa trên độ dài nội dung
+                const noteLength = note.note.length;
+                const width = Math.min(200 + noteLength * 3, 400); // Chiều rộng tối đa 400px
+                const height = Math.min(100 + Math.floor(noteLength / 15) * 10, 150); // Chiều cao tùy theo số từ
+
+                noteItem.style.width = `${width}px`; // Điều chỉnh chiều rộng
+                noteItem.style.height = `${height}px`; // Điều chỉnh chiều cao
+
+                // Thêm các ô lưu bút vào bãi container
                 notesList.appendChild(noteItem);
             });
         }
@@ -143,6 +163,16 @@
                 // Thêm mục mới vào danh sách hiển thị
                 const noteItem = document.createElement('li');
                 noteItem.textContent = `${name}: ${note}`;
+
+                // Điều chỉnh kích thước container (li) dựa trên độ dài nội dung
+                const noteLength = note.length;
+                const width = Math.min(200 + noteLength * 3, 400); // Chiều rộng tối đa 400px
+                const height = Math.min(100 + Math.floor(noteLength / 15) * 10, 150); // Chiều cao tùy theo số từ
+
+                noteItem.style.width = `${width}px`; // Điều chỉnh chiều rộng
+                noteItem.style.height = `${height}px`; // Điều chỉnh chiều cao
+
+                // Thêm mục vào bãi container
                 document.getElementById('notes').appendChild(noteItem);
 
                 // Làm trống các ô input sau khi lưu
