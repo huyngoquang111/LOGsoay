@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lưu Bút Người Dùng</title>
+    <title>Lưu Bút Người Dùng với Icon Lốc Xoáy</title>
     <style>
         * {
             margin: 0;
@@ -22,6 +22,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            position: relative;
         }
 
         .container {
@@ -104,6 +105,25 @@
             transform: scale(1.05);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
+
+        /* Icon lốc xoáy */
+        .twister-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 48px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rung hiệu ứng */
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
     </style>
 </head>
 <body>
@@ -124,6 +144,9 @@
             <h2>Lưu Bút Đã Lưu:</h2>
             <ul id="notes"></ul>
         </div>
+
+        <!-- Icon lốc xoáy -->
+        <div class="twister-icon" id="twister">&#x21bb;</div>
     </div>
 
     <script>
@@ -185,6 +208,27 @@
 
         // Tải danh sách lưu bút khi trang được tải
         window.onload = loadNotes;
+
+        // Xử lý hiệu ứng lốc xoáy
+        document.getElementById('twister').addEventListener('click', function() {
+            const twister = document.getElementById('twister');
+            twister.style.animation = 'shake 0.3s infinite'; // Thêm hiệu ứng rung
+
+            // Chạy lốc xoáy trong 3 giây
+            let time = 0;
+            const interval = setInterval(() => {
+                const x = Math.random() * 90; // Vị trí ngẫu nhiên theo chiều ngang
+                const y = Math.random() * 90; // Vị trí ngẫu nhiên theo chiều dọc
+                twister.style.left = `${x}%`;
+                twister.style.top = `${y}%`;
+                time++;
+
+                if (time > 10) { // Chạy trong 3 giây (10 lần di chuyển)
+                    clearInterval(interval);
+                    twister.style.animation = ''; // Dừng hiệu ứng rung
+                }
+            }, 300);
+        });
     </script>
 </body>
 </html>
