@@ -106,12 +106,16 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Icon lốc xoáy */
+        /* Icon lốc xoáy thay bằng hình ảnh */
         .twister-icon {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 48px;
+            width: 50px;
+            height: 50px;
+            background-image: url('assets/dd3afeefc8871d0d4afcfaef07090001-removebg-preview.png'); /* Đặt hình ảnh vào icon */
+            background-size: cover;
+            background-position: center;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -146,7 +150,7 @@
         </div>
 
         <!-- Icon lốc xoáy -->
-        <div class="twister-icon" id="twister">&#x21bb;</div>
+        <div class="twister-icon" id="twister"></div>
     </div>
 
     <script>
